@@ -24,13 +24,13 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Button1 = New Button()
         CheckedListBox1 = New CheckedListBox()
-        Label1 = New Label()
-        Label2 = New Label()
-        Label3 = New Label()
-        Label4 = New Label()
-        Label5 = New Label()
-        Label6 = New Label()
-        Label7 = New Label()
+        Counter = New Label()
+        Random = New Label()
+        Sawtooth = New Label()
+        Sinusoid = New Label()
+        Square = New Label()
+        Triangle = New Label()
+        Constant = New Label()
         SuspendLayout()
         ' 
         ' Button1
@@ -51,74 +51,74 @@ Partial Class Form1
         CheckedListBox1.Size = New Size(141, 130)
         CheckedListBox1.TabIndex = 1
         ' 
-        ' Label1
+        ' Counter
         ' 
-        Label1.Location = New Point(200, 29)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(158, 37)
-        Label1.TabIndex = 2
-        Label1.Text = "Label1"
+        Counter.Location = New Point(200, 29)
+        Counter.Name = "Counter"
+        Counter.Size = New Size(158, 37)
+        Counter.TabIndex = 2
+        Counter.Text = "Counter: "
         ' 
-        ' Label2
+        ' Random
         ' 
-        Label2.Location = New Point(581, 29)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(158, 37)
-        Label2.TabIndex = 3
-        Label2.Text = "Label2"
+        Random.Location = New Point(581, 29)
+        Random.Name = "Random"
+        Random.Size = New Size(158, 37)
+        Random.TabIndex = 3
+        Random.Text = "Random: "
         ' 
-        ' Label3
+        ' Sawtooth
         ' 
-        Label3.Location = New Point(200, 89)
-        Label3.Name = "Label3"
-        Label3.Size = New Size(158, 37)
-        Label3.TabIndex = 4
-        Label3.Text = "Label3"
+        Sawtooth.Location = New Point(200, 89)
+        Sawtooth.Name = "Sawtooth"
+        Sawtooth.Size = New Size(158, 37)
+        Sawtooth.TabIndex = 4
+        Sawtooth.Text = "Sawtooth: "
         ' 
-        ' Label4
+        ' Sinusoid
         ' 
-        Label4.Location = New Point(581, 89)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(158, 37)
-        Label4.TabIndex = 5
-        Label4.Text = "Label4"
+        Sinusoid.Location = New Point(581, 89)
+        Sinusoid.Name = "Sinusoid"
+        Sinusoid.Size = New Size(158, 37)
+        Sinusoid.TabIndex = 5
+        Sinusoid.Text = "Sinusoi: "
         ' 
-        ' Label5
+        ' Square
         ' 
-        Label5.Location = New Point(200, 143)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(158, 37)
-        Label5.TabIndex = 6
-        Label5.Text = "Label5"
+        Square.Location = New Point(200, 143)
+        Square.Name = "Square"
+        Square.Size = New Size(158, 37)
+        Square.TabIndex = 6
+        Square.Text = "Square: "
         ' 
-        ' Label6
+        ' Triangle
         ' 
-        Label6.Location = New Point(581, 143)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(158, 37)
-        Label6.TabIndex = 7
-        Label6.Text = "Label6"
+        Triangle.Location = New Point(581, 143)
+        Triangle.Name = "Triangle"
+        Triangle.Size = New Size(158, 37)
+        Triangle.TabIndex = 7
+        Triangle.Text = "Triangle: "
         ' 
-        ' Label7
+        ' Constant
         ' 
-        Label7.Location = New Point(200, 196)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(158, 37)
-        Label7.TabIndex = 8
-        Label7.Text = "Label7"
+        Constant.Location = New Point(200, 196)
+        Constant.Name = "Constant"
+        Constant.Size = New Size(158, 37)
+        Constant.TabIndex = 8
+        Constant.Text = "Constant: "
         ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
-        Controls.Add(Label7)
-        Controls.Add(Label6)
-        Controls.Add(Label5)
-        Controls.Add(Label4)
-        Controls.Add(Label3)
-        Controls.Add(Label2)
-        Controls.Add(Label1)
+        Controls.Add(Constant)
+        Controls.Add(Triangle)
+        Controls.Add(Square)
+        Controls.Add(Sinusoid)
+        Controls.Add(Sawtooth)
+        Controls.Add(Random)
+        Controls.Add(Counter)
         Controls.Add(CheckedListBox1)
         Controls.Add(Button1)
         Name = "Form1"
@@ -128,12 +128,12 @@ Partial Class Form1
 
     Friend WithEvents Button1 As Button
     Friend WithEvents CheckedListBox1 As CheckedListBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
+    Friend WithEvents Counter As Label
+    Friend WithEvents Random As Label
+    Friend WithEvents Sawtooth As Label
+    Friend WithEvents Sinusoid As Label
+    Friend WithEvents Square As Label
+    Friend WithEvents Triangle As Label
+    Friend WithEvents Constant As Label
 
 End Class
