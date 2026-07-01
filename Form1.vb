@@ -92,14 +92,63 @@ Public Class Form1
             Dim SessionEndpoint = New ConfiguredEndpoint(Nothing, endpoint, EndpointConfig)
 
             Dim identity = New UserIdentity(New AnonymousIdentityToken())
-            Dim Sess = Await Session.Create(config, SessionEndpoint, False, "MySession", 60000, identity, Nothing)
+            Dim opcSession = Await Session.Create(config, SessionEndpoint, False, "MySession", 60000, identity, Nothing)
             Debug.WriteLine("Successfully connected to Prosys Server!")
-            'ns=3 i=1007
+
+
+            ' Set up browser to traverse the OPC UA node tree
+            Dim browser = New Browser(opcSession)
+            ' Traverse down the tree - parent to child
+            browser.BrowseDirection = BrowseDirection.Forward
+            ' Only return folders, data values, and callable methods - filter out noise
+            browser.NodeClassMask = CInt(NodeClass.Object) Or CInt(NodeClass.Variable) Or CInt(NodeClass.Method)
+            ' Only follow parent-child relationships, not sideways connections like properties
+            browser.ReferenceTypeId = ReferenceTypeIds.HierarchicalReferences
+            ' Also follow subtypes like Organizes and HasComponent since HierarchicalReferences is never used directly
+            browser.IncludeSubtypes = True
+
+            Dim nodeToBrowse = ObjectIds.ObjectsFolder
+            Dim references = Await Browser.BrowseAsync(nodeToBrowse)
+
+            Dim sim = Nothing
+            For Each item In references
+                If item.DisplayName.Text = "Simulation" Then
+                    sim = ExpandedNodeId.ToNodeId(item.NodeId, opcSession.NamespaceUris)
+                End If
+            Next
+
+            nodeToBrowse = sim
+            references = Await browser.BrowseAsync(nodeToBrowse)
+
+            Dim tagNodes As New Dictionary(Of String, NodeId)
+            For Each item In references
+                sim = ExpandedNodeId.ToNodeId(item.NodeId, opcSession.NamespaceUris)
+                tagNodes(item.DisplayName.Text) = sim
+            Next
+
+            For Each kvp In tagNodes
+                Debug.WriteLine(kvp.Key & " -> " & kvp.Value.ToString())
+            Next
+
+
+
         Catch ex As Exception
             Debug.WriteLine("Error: " & ex.Message)
         End Try
     End Function
     Private Async Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+    End Sub
+
+    Private Async Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Await Main()
+    End Sub
+
+    Private Sub CheckedListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CheckedListBox1.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
     End Sub
 End Class
