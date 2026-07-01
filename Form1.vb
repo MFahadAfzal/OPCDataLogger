@@ -1,16 +1,20 @@
 ﻿Imports System
+Imports System.Diagnostics
 Imports System.ComponentModel.DataAnnotations
+Imports System.Net
 Imports System.Security.Cryptography.X509Certificates
+Imports System.Security.Principal
 Imports System.Threading.Tasks
 Imports Microsoft.VisualBasic.ApplicationServices
 Imports Opc.Ua
 Imports Opc.Ua.Client
 Imports Opc.Ua.LoggerUtils
+Imports Opc.Ua.Security.Certificates
 Public Class Form1
-    Async Function Main() As Task(Of String)
+    Async Function Main() As Task
         Dim serverUrl As String = "opc.tcp://localhost:53530/OPCUA/SimulationServer"
         Try
-            Console.WriteLine("Configuring OPC UA Client Application...")
+            Debug.WriteLine("Configuring OPC UA Client Application...")
 
             ' Describe our app to the OPC UA library - name, type, and unique ID
             Dim config = New ApplicationConfiguration()
@@ -69,10 +73,9 @@ Public Class Form1
 
             ' If no certificate exists yet, create one and save it
             If hasCert Is Nothing Then
-                Console.WriteLine("Creating new application instance certificate...")
-                Dim clientCertificate As X509Certificate2 = CertificateFactory.CreateCertificate(
-                config.ApplicationUri, config.ApplicationName, Nothing, Nothing)
-
+                Debug.WriteLine("Creating new application instance certificate...")
+                Dim certBuilder As CertificateBuilder = CertificateFactory.CreateCertificate(config.ApplicationUri, config.ApplicationName, Nothing, Nothing)
+                Dim clientCertificate = certBuilder.CreateForRSA()
                 config.SecurityConfiguration.ApplicationCertificate.Certificate = clientCertificate
             End If
 
@@ -84,14 +87,19 @@ Public Class Form1
                     End Sub
             End If
 
+            Dim endpoint = Await CoreClientUtils.SelectEndpointAsync(config, serverUrl, True, 5000)
+            Dim EndpointConfig = EndpointConfiguration.Create(config)
+            Dim SessionEndpoint = New ConfiguredEndpoint(Nothing, endpoint, EndpointConfig)
 
-
-
+            Dim identity = New UserIdentity(New AnonymousIdentityToken())
+            Dim Sess = Await Session.Create(config, SessionEndpoint, False, "MySession", 60000, identity, Nothing)
+            Debug.WriteLine("Successfully connected to Prosys Server!")
+            'ns=3 i=1007
         Catch ex As Exception
-
+            Debug.WriteLine("Error: " & ex.Message)
         End Try
     End Function
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
+    Private Async Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Await Main()
     End Sub
 End Class
