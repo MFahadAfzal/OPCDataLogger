@@ -88,7 +88,5 @@ A Windows desktop application (VB.NET, .NET 10) that connects to an OPC UA serve
 
 6. **Build and run the application.** With Prosys running and the database seeded, the app will connect, browse the server's tags, subscribe to live updates, and begin logging.
 
-## Project Status
 
-Core pipeline is complete and working: connection, dynamic browsing, real-time subscriptions, thread-safe UI updates, and SQL Server logging.
 
