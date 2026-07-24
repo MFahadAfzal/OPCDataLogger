@@ -1,17 +1,18 @@
-﻿Imports System
+﻿
+Imports System
 Imports System.Diagnostics
 Imports System.Threading
 Imports System.Threading.Channels
 Imports System.Threading.Tasks
-Imports Microsoft.Data.SqlClient
 Imports Opc.Ua
 Imports Opc.Ua.Client
 Imports Opc.Ua.Security.Certificates
 
 Public Class OPCClient
-    'Database connection
-    Private myConn As SqlConnection
-    Private myCmd As SqlCommand
+
+    ' Handles all SQL Server reads/writes - OPCClient no longer talks to the
+    ' database directly
+    Private dataService As New DataService()
 
     ' Address of the Prosys OPC UA Simulation Server we connect to
     Private serverUrl As String = "opc.tcp://localhost:53530/OPCUA/SimulationServer"
@@ -25,7 +26,6 @@ Public Class OPCClient
     Private uiForm As Form1
     Public Sub New(form As Form1)
         uiForm = form
-        myConn = New SqlConnection("Initial Catalog=OPCDataLogger;Data Source=localhost\SQLEXPRESS;Integrated Security=SSPI;TrustServerCertificate=True;")
     End Sub
 
     ' Maps tag name (e.g. "Counter") -> NodeId, populated by BrowseTags()
@@ -216,18 +216,9 @@ Public Class OPCClient
                 ' Look up which tag this handle corresponds to
                 Dim name = tagHandles(change.ClientHandle)
 
-                myCmd = myConn.CreateCommand
-                myCmd.CommandText = "INSERT INTO logs (name, value, timeAccessed) VALUES (@name, @value, @time)"
-                myCmd.Parameters.AddWithValue("@name", name)
-                myCmd.Parameters.AddWithValue("@value", change.Value.WrappedValue.ToString())
-                myCmd.Parameters.AddWithValue("@time", change.Value.SourceTimestamp)
+                ' Persist the change - DataService owns the actual insert/update logic
+                dataService.LogChange(name, change.Value.WrappedValue.ToString(), change.Value.SourceTimestamp)
 
-                myConn.Open()
-                myCmd.ExecuteNonQuery()
-                myCmd.CommandText = "UPDATE currentValues SET value = @value, timeAccessed = @time WHERE name = @name"
-
-                myCmd.ExecuteNonQuery()
-                myConn.Close()
                 ' Find the label on the form whose Name matches the tag name
                 Dim foundLabel = CType(uiForm.Controls.Find(name, True)(0), Label)
 

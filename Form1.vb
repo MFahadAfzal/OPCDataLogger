@@ -1,6 +1,7 @@
 ﻿Imports System
 Imports System.Diagnostics
 Imports System.Threading.Tasks
+Imports System.Windows
 Imports Opc.Ua
 
 Public Class Form1
@@ -21,8 +22,20 @@ Public Class Form1
 
     End Sub
 
-    Private Sub CheckedListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CheckedListBox1.SelectedIndexChanged
+    Private Sub CheckedListBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
 
+    Private Sub Constant_Click(sender As Object, e As EventArgs) Handles Constant.Click
+
+    End Sub
+
+    Private Sub CheckedListBox1_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles CheckedListBox1.SelectedIndexChanged
+    End Sub
+
+    Private Sub CheckedListBox1_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles CheckedListBox1.ItemCheck
+        Dim name = CheckedListBox1.Items(e.Index)
+        Dim newWindow As New HistoryForm(name)
+        newWindow.Show()
+    End Sub
 End Class

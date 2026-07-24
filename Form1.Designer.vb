@@ -23,7 +23,6 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Button1 = New Button()
-        CheckedListBox1 = New CheckedListBox()
         Counter = New Label()
         Random = New Label()
         Sawtooth = New Label()
@@ -31,6 +30,7 @@ Partial Class Form1
         Square = New Label()
         Triangle = New Label()
         Constant = New Label()
+        CheckedListBox1 = New CheckedListBox()
         SuspendLayout()
         ' 
         ' Button1
@@ -42,18 +42,9 @@ Partial Class Form1
         Button1.Text = "Button1"
         Button1.UseVisualStyleBackColor = True
         ' 
-        ' CheckedListBox1
-        ' 
-        CheckedListBox1.FormattingEnabled = True
-        CheckedListBox1.Items.AddRange(New Object() {"Counter", "Random", "Sawtooth", "Sinusoid", "Square", "Triangle", "Constant"})
-        CheckedListBox1.Location = New Point(12, 12)
-        CheckedListBox1.Name = "CheckedListBox1"
-        CheckedListBox1.Size = New Size(141, 130)
-        CheckedListBox1.TabIndex = 1
-        ' 
         ' Counter
         ' 
-        Counter.Location = New Point(200, 29)
+        Counter.Location = New Point(196, 29)
         Counter.Name = "Counter"
         Counter.Size = New Size(158, 37)
         Counter.TabIndex = 2
@@ -61,7 +52,7 @@ Partial Class Form1
         ' 
         ' Random
         ' 
-        Random.Location = New Point(581, 29)
+        Random.Location = New Point(553, 29)
         Random.Name = "Random"
         Random.Size = New Size(158, 37)
         Random.TabIndex = 3
@@ -69,7 +60,7 @@ Partial Class Form1
         ' 
         ' Sawtooth
         ' 
-        Sawtooth.Location = New Point(200, 89)
+        Sawtooth.Location = New Point(196, 80)
         Sawtooth.Name = "Sawtooth"
         Sawtooth.Size = New Size(158, 37)
         Sawtooth.TabIndex = 4
@@ -77,7 +68,7 @@ Partial Class Form1
         ' 
         ' Sinusoid
         ' 
-        Sinusoid.Location = New Point(581, 89)
+        Sinusoid.Location = New Point(553, 89)
         Sinusoid.Name = "Sinusoid"
         Sinusoid.Size = New Size(158, 37)
         Sinusoid.TabIndex = 5
@@ -85,7 +76,7 @@ Partial Class Form1
         ' 
         ' Square
         ' 
-        Square.Location = New Point(200, 143)
+        Square.Location = New Point(196, 143)
         Square.Name = "Square"
         Square.Size = New Size(158, 37)
         Square.TabIndex = 6
@@ -93,7 +84,7 @@ Partial Class Form1
         ' 
         ' Triangle
         ' 
-        Triangle.Location = New Point(581, 143)
+        Triangle.Location = New Point(553, 143)
         Triangle.Name = "Triangle"
         Triangle.Size = New Size(158, 37)
         Triangle.TabIndex = 7
@@ -101,17 +92,27 @@ Partial Class Form1
         ' 
         ' Constant
         ' 
-        Constant.Location = New Point(200, 196)
+        Constant.Location = New Point(196, 204)
         Constant.Name = "Constant"
         Constant.Size = New Size(158, 37)
         Constant.TabIndex = 8
         Constant.Text = "Constant: "
+        ' 
+        ' CheckedListBox1
+        ' 
+        CheckedListBox1.FormattingEnabled = True
+        CheckedListBox1.Items.AddRange(New Object() {"Counter", "Random", "Sawtooth", "Sinusoid", "Square", "Triangle", "Constant"})
+        CheckedListBox1.Location = New Point(12, 29)
+        CheckedListBox1.Name = "CheckedListBox1"
+        CheckedListBox1.Size = New Size(151, 148)
+        CheckedListBox1.TabIndex = 9
         ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
+        Controls.Add(CheckedListBox1)
         Controls.Add(Constant)
         Controls.Add(Triangle)
         Controls.Add(Square)
@@ -119,7 +120,6 @@ Partial Class Form1
         Controls.Add(Sawtooth)
         Controls.Add(Random)
         Controls.Add(Counter)
-        Controls.Add(CheckedListBox1)
         Controls.Add(Button1)
         Name = "Form1"
         Text = "Form1"
@@ -127,7 +127,6 @@ Partial Class Form1
     End Sub
 
     Friend WithEvents Button1 As Button
-    Friend WithEvents CheckedListBox1 As CheckedListBox
     Friend WithEvents Counter As Label
     Friend WithEvents Random As Label
     Friend WithEvents Sawtooth As Label
@@ -135,5 +134,6 @@ Partial Class Form1
     Friend WithEvents Square As Label
     Friend WithEvents Triangle As Label
     Friend WithEvents Constant As Label
+    Friend WithEvents CheckedListBox1 As CheckedListBox
 
 End Class
