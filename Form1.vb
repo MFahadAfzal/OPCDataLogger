@@ -18,17 +18,6 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Async Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-    End Sub
-
-    Private Sub CheckedListBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Constant_Click(sender As Object, e As EventArgs) Handles Constant.Click
-
-    End Sub
 
     Private Sub CheckedListBox1_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles CheckedListBox1.SelectedIndexChanged
     End Sub
