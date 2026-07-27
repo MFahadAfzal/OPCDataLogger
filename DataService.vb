@@ -29,9 +29,13 @@ Public Class DataService
 
     Public Function PullData(name As String) As List(Of Tuple(Of DateTime, Double))
         Dim historyData As New List(Of Tuple(Of DateTime, Double))
+        Dim currentTime As DateTime = DateTime.Now
+        Dim fiveMinutesAgo As DateTime = DateTime.Now.AddMinutes(-1)
+
         myCmd = myConn.CreateCommand
-        myCmd.CommandText = "SELECT * FROM logs WHERE name = @name ORDER BY timeAccessed"
+        myCmd.CommandText = "SELECT * FROM logs WHERE name = @name AND timeAccessed > @cutOffTime ORDER BY timeAccessed"
         myCmd.Parameters.AddWithValue("@name", name)
+        myCmd.Parameters.AddWithValue("@cutOffTime", fiveMinutesAgo)
 
         myConn.Open()
         Dim reader As SqlDataReader = myCmd.ExecuteReader()

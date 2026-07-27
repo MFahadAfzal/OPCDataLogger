@@ -9,6 +9,13 @@
     Private Async Sub HistoryForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim foundLabel = CType(Me.Controls.Find("tagTitle", True)(0), Label)
         foundLabel.Text = varName
+        Dim histData = dataService.PullData(varName)
+
+        Dim names = histData.Select(Function(p) p.Item1).ToList()
+        Dim times = histData.Select(Function(p) p.Item2).ToList()
+
+        FormsPlot1.Plot.Add.Scatter(names, times)
+
     End Sub
 
 End Class

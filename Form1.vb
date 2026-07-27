@@ -23,8 +23,11 @@ Public Class Form1
     End Sub
 
     Private Sub CheckedListBox1_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles CheckedListBox1.ItemCheck
-        Dim name = CheckedListBox1.Items(e.Index)
-        Dim newWindow As New HistoryForm(name)
-        newWindow.Show()
+        ''opens new graphs window if the item is checked
+        If e.NewValue = CheckState.Checked Then
+            Dim name = CheckedListBox1.Items(e.Index)
+            Dim newWindow As New HistoryForm(name)
+            newWindow.Show()
+        End If
     End Sub
 End Class
