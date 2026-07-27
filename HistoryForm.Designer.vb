@@ -22,8 +22,10 @@ Partial Class HistoryForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        components = New ComponentModel.Container()
         FormsPlot1 = New ScottPlot.WinForms.FormsPlot()
         tagTitle = New Label()
+        Timer1 = New Timer(components)
         SuspendLayout()
         ' 
         ' FormsPlot1
@@ -42,9 +44,14 @@ Partial Class HistoryForm
         tagTitle.TabIndex = 2
         tagTitle.Text = "Label1"
         ' 
+        ' Timer1
+        ' 
+        Timer1.Enabled = True
+        Timer1.Interval = 1000
+        ' 
         ' HistoryForm
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
         Controls.Add(tagTitle)
@@ -55,4 +62,5 @@ Partial Class HistoryForm
     End Sub
     Friend WithEvents FormsPlot1 As ScottPlot.WinForms.FormsPlot
     Friend WithEvents tagTitle As Label
+    Friend WithEvents Timer1 As Timer
 End Class

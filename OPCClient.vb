@@ -217,7 +217,7 @@ Public Class OPCClient
                 Dim name = tagHandles(change.ClientHandle)
 
                 ' Persist the change - DataService owns the actual insert/update logic
-                dataService.LogChange(name, change.Value.WrappedValue.ToString(), change.Value.SourceTimestamp)
+                dataService.LogChange(name, change.Value.WrappedValue.ToString(), DateTime.Now)
 
                 ' Find the label on the form whose Name matches the tag name
                 Dim foundLabel = CType(uiForm.Controls.Find(name, True)(0), Label)

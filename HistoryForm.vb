@@ -11,11 +11,20 @@
         foundLabel.Text = varName
         Dim histData = dataService.PullData(varName)
 
-        Dim names = histData.Select(Function(p) p.Item1).ToList()
+        Dim values = histData.Select(Function(p) p.Item1).ToList()
         Dim times = histData.Select(Function(p) p.Item2).ToList()
-
-        FormsPlot1.Plot.Add.Scatter(names, times)
+        FormsPlot1.Plot.Add.Scatter(values, times)
+        FormsPlot1.Plot.Axes.DateTimeTicksBottom()
 
     End Sub
 
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Dim histData = dataService.PullData(varName)
+        Dim values = histData.Select(Function(p) p.Item1).ToList()
+        Dim times = histData.Select(Function(p) p.Item2).ToList()
+        FormsPlot1.Plot.Clear()
+        FormsPlot1.Plot.Add.Scatter(values, times)
+        FormsPlot1.Plot.Axes.DateTimeTicksBottom()
+        FormsPlot1.Refresh()
+    End Sub
 End Class
