@@ -7,7 +7,7 @@ Imports Opc.Ua
 Public Class Form1
 
     Private client As New OPCClient(Me)
-
+    Private historyWindows As New Dictionary(Of HistoryForm, Integer)
     Private Async Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             Await client.Connect()
@@ -27,7 +27,20 @@ Public Class Form1
         If e.NewValue = CheckState.Checked Then
             Dim name = CheckedListBox1.Items(e.Index)
             Dim newWindow As New HistoryForm(name)
+            historyWindows(newWindow) = e.Index
+            AddHandler newWindow.FormClosed, AddressOf HandleWindowClose
             newWindow.Show()
+
+
         End If
+
+
+    End Sub
+
+    Private Sub HandleWindowClose(sender As Object, e As EventArgs)
+        Dim closedForm As HistoryForm = CType(sender, HistoryForm)
+        Dim indexToUncheck As Integer = historyWindows(closedForm)
+        CheckedListBox1.SetItemChecked(indexToUncheck, False)
+        historyWindows.Remove(closedForm)
     End Sub
 End Class
